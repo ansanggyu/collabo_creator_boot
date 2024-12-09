@@ -38,6 +38,6 @@ public class QnAEntity extends BasicEntity {
     @Column(name = "question", nullable = false)
     private String question;
 
-    @Column(name = "answer", nullable = false)
+    @Column(name = "answer")
     private String answer;
 }

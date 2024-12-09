@@ -37,11 +37,14 @@ public class CreatorEntity extends BasicEntity {
     @Column(name = "creator_password", nullable = false)
     private String creatorPassword;
 
-    @Column(name = "background_img", length = 512)
+    @Column(name = "background_img", length = 2000)
     private String backgroundImg;
 
-    @Column(name = "logo_img", length = 512)
+    @Column(name = "logo_img", length = 2000)
     private String logoImg;
+
+    @Column(name = "del_flag", columnDefinition = "BOOLEAN DEFAULT false")
+    private Boolean delFlag = Boolean.FALSE;
 
     @Column(name = "email_notifications", columnDefinition = "BOOLEAN DEFAULT true")
     private Boolean emailNotifications = Boolean.TRUE;
@@ -70,4 +73,5 @@ public class CreatorEntity extends BasicEntity {
     // Creator와 연관된 OfflineStore
     @OneToMany(mappedBy = "creatorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CreatorOfflineStoreEntity> offlineStoreEntities = new ArrayList<>();
+
 }

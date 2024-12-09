@@ -22,22 +22,18 @@ public class OrderListDTO {
     private String customerAddrDetail;
     private List<OrderItemDTO> orderItems;
     private Integer totalPrice;
-    private String orderStatus; // 데이터베이스 값 (숫자)
+    private OrderStatus orderStatus;
 
     @JsonProperty("orderDate")
-    public String getFormattedCreatedAt() {
+    public String getFormattedOrderDate() {
         if (orderDate != null) {
             return orderDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
         return null;
     }
 
-    @JsonProperty("orderStatus") // JSON 응답에서 문자열 상태 반환
+    @JsonProperty("orderStatus")
     public String getOrderStatusDescription() {
-        try {
-            return OrderStatus.fromDbValue(orderStatus).getDescription();
-        } catch (IllegalArgumentException e) {
-            return "알 수 없음";
-        }
+        return orderStatus != null ? orderStatus.name() : "UNKNOWN";
     }
 }

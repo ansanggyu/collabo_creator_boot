@@ -3,6 +3,8 @@ package org.example.collabo_creator_boot.order.service;
 import lombok.RequiredArgsConstructor;
 import org.example.collabo_creator_boot.common.PageRequestDTO;
 import org.example.collabo_creator_boot.common.PageResponseDTO;
+import org.example.collabo_creator_boot.order.domain.OrderStatus;
+import org.example.collabo_creator_boot.order.domain.OrdersEntity;
 import org.example.collabo_creator_boot.order.dto.OrderDetailDTO;
 import org.example.collabo_creator_boot.order.dto.OrderItemDTO;
 import org.example.collabo_creator_boot.order.dto.OrderListDTO;
@@ -31,5 +33,12 @@ public class OrderService {
         List<OrderItemDTO> orderItems = orderRepository.findOrderItems(orderNo);
         orderDetail.setOrderItems(orderItems);
         return orderDetail;
+    }
+
+    public void updateOrderStatus(Long orderNo, OrderStatus newStatus) {
+        OrdersEntity order = orderRepository.findById(orderNo)
+                .orElseThrow(() -> new IllegalArgumentException("Order not found with id: " + orderNo));
+        order.setStatus(newStatus);
+        orderRepository.save(order);
     }
 }

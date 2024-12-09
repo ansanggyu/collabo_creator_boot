@@ -18,13 +18,13 @@ public class ProductImageEntity extends BasicEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_image_no")
-    private int productImageNo;
+    private Integer productImageNo;
 
     @Column(name = "product_image_url", length = 2000)
     private String productImageUrl;
 
     @Column(name = "product_image_ord")
-    private int productImageOrd;
+    private Integer productImageOrd;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_no", referencedColumnName = "product_no")

@@ -12,7 +12,7 @@ import java.util.List;
 public class OrderDetailDTO {
     private Long orderNo;
     private LocalDateTime orderDate;
-    private String orderStatus;
+    private OrderStatus orderStatus;
 
     // 주문자 정보
     private String customerName;
@@ -23,7 +23,7 @@ public class OrderDetailDTO {
     // 주문 상품
     private List<OrderItemDTO> orderItems;
 
-    public OrderDetailDTO(Long orderNo, LocalDateTime orderDate, String orderStatus,
+    public OrderDetailDTO(Long orderNo, LocalDateTime orderDate, OrderStatus orderStatus,
                           String customerName, String customerPhone, String customerAddr, String customerAddrDetail) {
         this.orderNo = orderNo;
         this.orderDate = orderDate;
@@ -35,20 +35,15 @@ public class OrderDetailDTO {
     }
 
     @JsonProperty("orderDate")
-    public String getFormattedCreatedAt() {
+    public String getFormattedOrderDate() {
         if (orderDate != null) {
             return orderDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
         return null;
     }
 
-    @JsonProperty("orderStatus") // JSON 응답에서 문자열 상태 반환
+    @JsonProperty("orderStatusDescription")
     public String getOrderStatusDescription() {
-        try {
-            return OrderStatus.fromDbValue(orderStatus).getDescription();
-        } catch (IllegalArgumentException e) {
-            return "알 수 없음";
-        }
+        return orderStatus != null ? orderStatus.getDescription() : "알 수 없음";
     }
-
 }

@@ -3,6 +3,7 @@ package org.example.collabo_creator_boot.order.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.collabo_creator_boot.common.PageRequestDTO;
 import org.example.collabo_creator_boot.common.PageResponseDTO;
+import org.example.collabo_creator_boot.order.domain.OrderStatus;
 import org.example.collabo_creator_boot.order.dto.OrderDetailDTO;
 import org.example.collabo_creator_boot.order.dto.OrderListDTO;
 import org.example.collabo_creator_boot.order.service.OrderService;
@@ -32,5 +33,13 @@ public class OrderController {
 
         OrderDetailDTO orderDetail = orderService.getOrderDetailByCreator(creatorId, orderNo);
         return ResponseEntity.ok(orderDetail);
+    }
+
+    @PatchMapping("/{orderNo}/status")
+    public ResponseEntity<Void> updateOrderStatus(
+            @PathVariable Long orderNo,
+            @RequestParam OrderStatus status) {
+        orderService.updateOrderStatus(orderNo, status);
+        return ResponseEntity.ok().build();
     }
 }

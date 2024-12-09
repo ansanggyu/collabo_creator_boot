@@ -8,8 +8,8 @@ spring:
     password: manna20@#
 
     hikari:
-      minimum-idle: 2
-      maximum-pool-size: 5
+      minimum-idle: 5
+      maximum-pool-size: 10
       connection-timeout: 5000
 
   jpa:
