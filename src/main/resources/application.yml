@@ -10,6 +10,7 @@ spring:
     hikari:
       minimum-idle: 5
       maximum-pool-size: 10
+      initialization-fail-timeout: 0
       connection-timeout: 5000
 
   jpa:
